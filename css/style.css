@@ -1,0 +1,947 @@
+:root {
+    --primario: #1e272e;
+    --secundario: #FFD700;
+    --gris: #f5f5f5;
+    --blanco: #ffffff;
+    --negro: #212121;
+    --gris-oscuro: #757575;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Krub', sans-serif;
+    background-color: var(--gris);
+    color: var(--negro);
+}
+
+header {
+    background-color: var(--primario);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navegacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+@media(min-width: 768px){
+    .barra{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  }
+
+@media(min-width: 768px){
+    .navegacion{
+        display: flex;
+        gap: 2rem;
+    }
+}
+
+.logo {
+  color: var(--blanco);
+  font-family: 'Staatliches', cursive;
+  font-size: 2.5rem;
+  text-decoration: none;
+  text-align: left;
+}
+
+.nav-items {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secundario);
+}
+.contenedor {
+    width: min(90%, 120rem);
+    margin: 0 auto;
+  }
+
+.contenedor-icono {
+    position: relative;
+    cursor: pointer;
+}
+
+.count-producto {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--secundario);
+    color: var(--blanco);
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.slider-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideshow {
+    0% { left: 0; }
+    20% { left: 0; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: 0; }
+}
+
+.slider {
+    position: relative;
+    width: 400%;
+    display: flex;
+    left: 0;
+    animation: slideshow 13s infinite;
+}
+
+.slider:hover {
+    animation-play-state: start;
+}
+
+.slide {
+    width: 25%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--blanco);
+    padding: 20px;
+}
+
+.slide-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Staatliches', cursive;
+}
+
+.slide-description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.destacados-titulo {
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+    font-size: 2.5rem;
+    margin: 3rem 0 2rem;
+    color: var(--primario);
+}
+
+.contenedor-items {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.item {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.info-producto {
+    padding: 1.5rem;
+}
+
+.info-producto h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: var(--primario);
+}
+
+.precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gris-oscuro);
+    margin-bottom: 1rem;
+}
+
+.info-producto p {
+    margin-bottom: 1rem;
+    color: var(--gris-oscuro);
+    line-height: 1.5;
+}
+
+.item button {
+    background-color: var(--primario);
+    color: var(--blanco);
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.item button:hover {
+    background-color: #00cec9;
+}
+
+.item button:last-child {
+    background-color: var(--gris-oscuro);
+}
+
+.item button:last-child:hover {
+    background-color: #616161;
+}
+
+.detalles-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .detalles-container {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+.galeria {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: var(--blanco);
+}
+
+.imagen-principal {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.miniaturas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.miniatura {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.miniatura:hover {
+    opacity: 0.8;
+}
+
+.detalles-info {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.detalles-titulo {
+    color: var(--primario);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Staatliches', cursive;
+    border-bottom: 2px solid var(--primario);
+    padding-bottom: 0.5rem;
+}
+
+.precio-detalle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--gris-oscuro);
+    margin-bottom: 1.5rem;
+}
+
+.detalles-descripcion p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.caracteristicas {
+    margin: 1.5rem 0;
+}
+
+.caracteristicas h3 {
+    margin-bottom: 1rem;
+    color: var(--primario);
+    font-size: 1.3rem;
+}
+
+.lista-caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+}
+
+.caracteristica-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.caracteristica-item svg {
+    color: var(--primario);
+}
+
+.boton-reserva {
+    background-color: var(--primario);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.boton-reserva:hover {
+    background-color: #00cec9;
+}
+
+.ubicacion-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.ubicacion-titulo {
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+    font-size: 2rem;
+    color: var(--primario);
+    margin-bottom: 1.5rem;
+}
+
+.mapa-container {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+}
+
+.mapa {
+    width: 100%;
+    height: 450px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e9e9e9;
+}
+
+.direccion {
+    margin-top: 1.5rem;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.direccion h3 {
+    margin-bottom: 1rem;
+    color: var(--primario);
+}
+
+.direccion p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.contacto-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contacto-titulo {
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+    font-size: 2rem;
+    color: var(--primario);
+    margin-bottom: 1.5rem;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .contacto-grid {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.propietario-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.propietario-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+.propietario-fotoes {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.propietario-nombre {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.propietario-contacto {
+    width: 100%;
+}
+
+.propietario-contacto a {
+    display: block;
+    background-color: var(--primario);
+    color: var(--blanco);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.propietario-contacto a:hover {
+    background-color: #00cec9;
+}
+
+.propietario-contacto a:last-child {
+    background-color: #00cec9;
+}
+
+.propietario-contacto a:last-child:hover {
+    background-color: #128C7E;
+}
+
+.formulario-contacto {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grupo label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-grupo input,
+.form-grupo textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Krub', sans-serif;
+}
+
+.form-grupo textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.boton-enviar {
+    background-color: var(--primario);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-enviar:hover {
+    background-color: #00cec9;
+}
+
+
+footer {
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.footer-section h3 {
+    font-family: 'Staatliches', cursive;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.footer-section p, .footer-section a {
+    color: var(--gris);
+    line-height: 1.6;
+    display: block;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: var(--secundario);
+}
+
+.contacto-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/5.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--blanco);
+    text-align: center;
+    padding: 5rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.contacto-hero-content h1 {
+    font-family: 'Staatliches', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.contacto-hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.form-grupo {
+    margin-bottom: 1.2rem;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primario);
+}
+
+.form-grupo input,
+.form-grupo textarea,
+.form-grupo select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Krub', sans-serif;
+}
+
+.form-grupo textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-grupo select {
+    background-color: var(--blanco);
+}
+
+.boton-enviar {
+    background-color: var(--primario);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.boton-enviar:hover {
+    background-color: #00cec9;
+}
+
+@media (max-width: 768px) {
+    .contacto-hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .propietario-info {
+        margin-bottom: 2rem;
+    }
+    
+    .ubicacion-container,
+    .contacto-container,
+    .preguntas-frecuentes {
+        padding: 1rem;
+    }
+    
+    .mapa {
+        height: 300px;
+    }
+}
+
+/*responsive*/
+@media (max-width: 768px) {
+    .navegacion {
+      flex-direction: column;
+      padding: 0.5rem 1rem;
+    }
+    
+    .barra {
+      width: 100%;
+    }
+    
+    .logo {
+      margin-bottom: 0.5rem;
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+    
+    .nav-items {
+      width: 100%;
+      justify-content: space-around;
+      margin-top: 0.5rem;
+    }
+    
+    .nav-link {
+      font-size: 0.9rem;
+      padding: 0.5rem 0;
+    }
+    
+    .contenedor-icono {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .nav-items {
+      flex-wrap: wrap;
+    }
+    
+    .nav-link {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      margin: 0.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .slide img {
+      height: 250px;
+    }
+    
+    .slide-title {
+      font-size: 1.5rem;
+    }
+    
+    .slide-description {
+      font-size: 0.9rem;
+    }
+    
+    .slider-container {
+      margin: 1rem auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .slide img {
+      height: 180px;
+    }
+    
+    .slide-title {
+      font-size: 1.2rem;
+    }
+    
+    .slide-description {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .destacados-titulo {
+      font-size: 2rem;
+      margin: 2rem 0 1.5rem;
+    }
+    
+    .contenedor-items {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contenedor-items {
+      grid-template-columns: 1fr;
+    }
+    
+    .item button {
+      padding: 0.8rem;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+    
+    .item button:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .detalles-container {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .imagen-principal {
+      height: 300px;
+    }
+    
+    .miniaturas {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .detalles-titulo {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .miniaturas {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .miniatura {
+      height: 60px;
+    }
+    
+    .lista-caracteristicas {
+      grid-template-columns: 1fr;
+    }
+    
+    .detalles-titulo {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contacto-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .contacto-container {
+      padding: 1.5rem;
+    }
+    
+    .propietario-foto {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .propietario-info {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contacto-titulo {
+      font-size: 1.8rem;
+    }
+    
+    .form-grupo input,
+    .form-grupo textarea {
+      padding: 0.8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    
+    .footer-section h3 {
+      margin-bottom: 0.8rem;
+    }
+    
+    .copyright {
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      font-size: 15px;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    .precio {
+      font-size: 1.3rem;
+    }
+    
+    .info-producto p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .logo {
+      font-size: 1.8rem;
+    }
+    
+    .nav-link {
+      font-size: 0.75rem;
+      padding: 0.4rem;
+    }
+    
+    .destacados-titulo {
+      font-size: 1.7rem;
+    }
+    
+    .slide-title {
+      font-size: 1.1rem;
+    }
+    
+    .slide-description {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mapa {
+      height: 350px;
+    }
+    
+    .mapa-container {
+      padding: 0.5rem;
+    }
+    
+    .ubicacion-titulo {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .mapa {
+      height: 250px;
+    }
+    
+    .direccion {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contenedor {
+      padding: 0 1rem;
+    }
+    
+    .item {
+      margin-bottom: 1rem;
+    }
+    
+    .detalles-info {
+      padding: 1.5rem;
+    }
+  }
