@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 require_once 'php/config.php';
 $error='';
 if($_SERVER['REQUEST_METHOD']=='POST'){
