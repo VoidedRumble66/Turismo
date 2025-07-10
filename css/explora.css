@@ -1,0 +1,29 @@
+:root{
+  --verde-selva:#138a90;
+  --verde-claro:#36b39c;
+  --verde-pastel:#c6f4d6;
+  --azul-profundo:#20567b;
+  --azul-cielo:#67c7eb;
+  --blanco:#ffffff;
+  --gris-suave:#f5f7fa;
+}
+body{
+  background-color:var(--gris-suave);
+}
+.navbar{
+  background-color:var(--verde-selva);
+}
+.footer{
+  background-color:var(--azul-profundo);
+  color:var(--blanco);
+}
+.carousel-buttons{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:10;
+}
+.btn-big{
+  padding:1rem 2rem;
+  font-size:1.25rem;
+}
