@@ -2,6 +2,7 @@
 include 'php/head.php';
 include 'php/menu.php';
 require_once 'php/config.php';
+
 // Obtener lugares desde la base de datos (la primera foto de cada lugar)
 $stmt = $pdo->query("SELECT l.id_lugar,l.nombre,l.descripcion, MIN(f.ruta_foto) AS ruta_foto
                      FROM lugar l
@@ -9,6 +10,18 @@ $stmt = $pdo->query("SELECT l.id_lugar,l.nombre,l.descripcion, MIN(f.ruta_foto) 
                      WHERE l.activo=1
                      GROUP BY l.id_lugar");
 $lugares = $stmt->fetchAll();
+
+// lugares populares por número de comentarios
+$stmtPop = $pdo->query("SELECT l.id_lugar,l.nombre,l.descripcion, MIN(f.ruta_foto) AS ruta_foto, COUNT(c.id_comentario) comentarios
+                        FROM lugar l
+                        LEFT JOIN lugar_foto f ON l.id_lugar=f.id_lugar
+                        LEFT JOIN comentario c ON c.id_lugar=l.id_lugar
+                        WHERE l.activo=1
+                        GROUP BY l.id_lugar
+                        ORDER BY comentarios DESC
+                        LIMIT 3");
+$populares = $stmtPop->fetchAll();
+
 
 // Si no hay registros aún, mostrar algunos de ejemplo
 if(empty($lugares)){
@@ -45,6 +58,16 @@ if(empty($lugares)){
         ]
     ];
 }
+if(empty($populares)){
+    $populares = array_slice($lugares,0,3);
+}
+?>
+<div id="principalCarousel" class="carousel slide position-relative" data-bs-ride="carousel">
+  <div class="carousel-buttons">
+    <a href="login.php" class="btn btn-light btn-sm me-2">Iniciar sesión</a>
+    <a href="registro.php" class="btn btn-light btn-sm me-2">Registrarse</a>
+    <a href="lugares.php" class="btn btn-light btn-sm">Buscar lugares</a>
+  </div>
 $lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto FROM lugar l LEFT JOIN lugar_foto f ON l.id_lugar=f.id_lugar GROUP BY l.id_lugar")->fetchAll();
 ?>
 <div id="principalCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -57,6 +80,7 @@ $lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto 
       <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
         <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
         <p class="mb-0 small"><?php echo htmlspecialchars($l['descripcion']); ?></p>
+
       <div class="carousel-caption d-none d-md-block">
         <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
       </div>
@@ -72,6 +96,25 @@ $lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto 
 </div>
 
 <div class="container mt-5">
+  <h2 class="text-center mb-4">Lugares Populares</h2>
+  <div class="row">
+    <?php foreach($populares as $l): ?>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="<?php echo $l['ruta_foto']; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($l['nombre']); ?>">
+        <div class="card-body">
+          <h5 class="card-title"><?php echo htmlspecialchars($l['nombre']); ?></h5>
+          <p class="card-text"><?php echo substr($l['descripcion'],0,100).'...'; ?></p>
+          <a href="detalle_lugar.php?id=<?php echo $l['id_lugar']; ?>" class="btn btn-primary">Ver más</a>
+        </div>
+      </div>
+    </div>
+    <?php endforeach; ?>
+  </div>
+</div>
+
+<div class="container mt-5">
+
   <h2 class="text-center mb-4">Lugares Turísticos</h2>
   <div class="row">
     <?php foreach($lugares as $l): ?>
@@ -88,4 +131,9 @@ $lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto 
     <?php endforeach; ?>
   </div>
 </div>
+<div class="container text-center my-5">
+  <a href="contacto.php" class="btn btn-primary btn-big me-3">Contáctanos</a>
+  <a href="quienes_somos.php" class="btn btn-secondary btn-big">Conócenos</a>
+</div>
+
 <?php include 'php/footer.php'; ?>

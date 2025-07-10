@@ -31,6 +31,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $stm->execute([$nombre,$descripcion,$ubicacion,$distancia]);
         $id=$pdo->lastInsertId();
     }
+
+    // procesar fotos si se han enviado
+    if(!empty($_FILES['fotos']['name'][0])){
+        $dir = '../img/lugares/';
+        if(!is_dir($dir)) mkdir($dir,0755,true);
+        foreach($_FILES['fotos']['tmp_name'] as $k=>$tmp){
+            if($_FILES['fotos']['error'][$k]===UPLOAD_ERR_OK){
+                $ext = pathinfo($_FILES['fotos']['name'][$k], PATHINFO_EXTENSION);
+                $nombreFoto = uniqid().".$ext";
+                if(move_uploaded_file($tmp,$dir.$nombreFoto)){
+                    $ruta = 'img/lugares/'.$nombreFoto;
+                    $pdo->prepare('INSERT INTO lugar_foto(id_lugar,ruta_foto) VALUES (?,?)')->execute([$id,$ruta]);
+                }
+            }
+        }
+    }
+
+
     header('Location: lugares.php');
     exit;
 }
@@ -39,6 +57,7 @@ include '../php/menu.php';
 ?>
 <div class="container mt-4" style="max-width:600px;">
 <h2><?php echo $id? 'Editar' : 'Nuevo'; ?> Lugar</h2>
+<form method="post" enctype="multipart/form-data">
 <form method="post">
   <div class="mb-3">
     <label class="form-label" for="nombre">Nombre</label>
@@ -56,6 +75,27 @@ include '../php/menu.php';
     <label class="form-label" for="distancia">Distancia (km)</label>
     <input type="number" step="0.01" name="distancia" id="distancia" class="form-control" value="<?php echo htmlspecialchars($distancia); ?>">
   </div>
+  <?php if($id): ?>
+  <div class="mb-3">
+    <label class="form-label">Fotos existentes</label>
+    <div class="d-flex flex-wrap gap-2">
+      <?php
+      $fotos=$pdo->prepare('SELECT * FROM lugar_foto WHERE id_lugar=?');
+      $fotos->execute([$id]);
+      foreach($fotos->fetchAll() as $f): ?>
+        <div class="position-relative" style="width:100px;">
+          <img src="../<?php echo $f['ruta_foto']; ?>" class="img-thumbnail" style="width:100px;height:80px;object-fit:cover;">
+          <a href="delete_foto.php?id=<?php echo $f['id_foto']; ?>" class="btn-close position-absolute top-0 end-0"></a>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+  <?php endif; ?>
+  <div class="mb-3">
+    <label class="form-label" for="fotos">Subir Fotos</label>
+    <input type="file" name="fotos[]" id="fotos" class="form-control" multiple accept="image/*">
+  </div>
+
   <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 </div>
