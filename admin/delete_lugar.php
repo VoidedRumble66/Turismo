@@ -12,6 +12,7 @@ foreach($fotos->fetchAll() as $f){
     $path = '../'.$f['ruta_foto'];
     if(file_exists($path)) unlink($path);
 }
+
 $stm=$pdo->prepare('DELETE FROM lugar WHERE id_lugar=?');
 $stm->execute([$id]);
 header('Location: lugares.php');

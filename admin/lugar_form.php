@@ -48,6 +48,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         }
     }
 
+
     header('Location: lugares.php');
     exit;
 }
@@ -57,6 +58,7 @@ include '../php/menu.php';
 <div class="container mt-4" style="max-width:600px;">
 <h2><?php echo $id? 'Editar' : 'Nuevo'; ?> Lugar</h2>
 <form method="post" enctype="multipart/form-data">
+<form method="post">
   <div class="mb-3">
     <label class="form-label" for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo htmlspecialchars($nombre); ?>" required>
@@ -93,6 +95,7 @@ include '../php/menu.php';
     <label class="form-label" for="fotos">Subir Fotos</label>
     <input type="file" name="fotos[]" id="fotos" class="form-control" multiple accept="image/*">
   </div>
+
   <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 </div>

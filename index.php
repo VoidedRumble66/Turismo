@@ -22,6 +22,7 @@ $stmtPop = $pdo->query("SELECT l.id_lugar,l.nombre,l.descripcion, MIN(f.ruta_fot
                         LIMIT 3");
 $populares = $stmtPop->fetchAll();
 
+
 // Si no hay registros aún, mostrar algunos de ejemplo
 if(empty($lugares)){
     $lugares = [
@@ -67,6 +68,9 @@ if(empty($populares)){
     <a href="registro.php" class="btn btn-light btn-sm me-2">Registrarse</a>
     <a href="lugares.php" class="btn btn-light btn-sm">Buscar lugares</a>
   </div>
+$lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto FROM lugar l LEFT JOIN lugar_foto f ON l.id_lugar=f.id_lugar GROUP BY l.id_lugar")->fetchAll();
+?>
+<div id="principalCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <?php foreach($lugares as $i => $l): ?>
     <div class="carousel-item <?php echo $i===0?'active':''; ?>">
@@ -76,6 +80,9 @@ if(empty($populares)){
       <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
         <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
         <p class="mb-0 small"><?php echo htmlspecialchars($l['descripcion']); ?></p>
+
+      <div class="carousel-caption d-none d-md-block">
+        <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
       </div>
     </div>
     <?php endforeach; ?>
@@ -107,6 +114,7 @@ if(empty($populares)){
 </div>
 
 <div class="container mt-5">
+
   <h2 class="text-center mb-4">Lugares Turísticos</h2>
   <div class="row">
     <?php foreach($lugares as $l): ?>
@@ -127,4 +135,5 @@ if(empty($populares)){
   <a href="contacto.php" class="btn btn-primary btn-big me-3">Contáctanos</a>
   <a href="quienes_somos.php" class="btn btn-secondary btn-big">Conócenos</a>
 </div>
+
 <?php include 'php/footer.php'; ?>

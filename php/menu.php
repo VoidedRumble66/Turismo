@@ -16,6 +16,7 @@
           <?php if(isset($_SESSION['rol']) && $_SESSION['rol']=='admin'): ?>
             <li class="nav-item"><a class="nav-link" href="admin/lugares.php">Admin</a></li>
           <?php endif; ?>
+
           <li class="nav-item"><a class="nav-link" href="logout.php">Salir</a></li>
         <?php else: ?>
           <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
