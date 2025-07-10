@@ -2,7 +2,6 @@
 include 'php/head.php';
 include 'php/menu.php';
 require_once 'php/config.php';
-
 // Obtener lugares desde la base de datos (la primera foto de cada lugar)
 $stmt = $pdo->query("SELECT l.id_lugar,l.nombre,l.descripcion, MIN(f.ruta_foto) AS ruta_foto
                      FROM lugar l
@@ -46,6 +45,7 @@ if(empty($lugares)){
         ]
     ];
 }
+$lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto FROM lugar l LEFT JOIN lugar_foto f ON l.id_lugar=f.id_lugar GROUP BY l.id_lugar")->fetchAll();
 ?>
 <div id="principalCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -57,6 +57,8 @@ if(empty($lugares)){
       <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
         <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
         <p class="mb-0 small"><?php echo htmlspecialchars($l['descripcion']); ?></p>
+      <div class="carousel-caption d-none d-md-block">
+        <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
       </div>
     </div>
     <?php endforeach; ?>
