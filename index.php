@@ -1,8 +1,40 @@
 <?php
 include 'php/head.php';
 include 'php/menu.php';
-require_once 'php/config.php';
-$lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto FROM lugar l LEFT JOIN lugar_foto f ON l.id_lugar=f.id_lugar GROUP BY l.id_lugar")->fetchAll();
+
+// Datos de ejemplo utilizados mientras la base de datos se llena
+$lugares = [
+    [
+        'id_lugar'   => 1,
+        'nombre'     => 'Cascadas de Agua Azul',
+        'descripcion'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+        'ruta_foto'  => 'img/aguaazul.jpeg'
+    ],
+    [
+        'id_lugar'   => 2,
+        'nombre'     => 'Zona Arqueológica de Toniná',
+        'descripcion'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+        'ruta_foto'  => 'img/tonina.jpeg'
+    ],
+    [
+        'id_lugar'   => 3,
+        'nombre'     => 'Lagunas de Montebello',
+        'descripcion'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+        'ruta_foto'  => 'img/montebello.jpeg'
+    ],
+    [
+        'id_lugar'   => 4,
+        'nombre'     => 'Centro de Ocosingo',
+        'descripcion'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+        'ruta_foto'  => 'img/ocosingo.jpg'
+    ],
+    [
+        'id_lugar'   => 5,
+        'nombre'     => 'Cascadas de Agua Azul II',
+        'descripcion'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+        'ruta_foto'  => 'img/aguaazul2.jpeg'
+    ]
+];
 ?>
 <div id="principalCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -11,8 +43,9 @@ $lugares = $pdo->query("SELECT l.id_lugar, l.nombre, l.descripcion, f.ruta_foto 
       <a href="detalle_lugar.php?id=<?php echo $l['id_lugar']; ?>">
         <img src="<?php echo $l['ruta_foto']; ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($l['nombre']); ?>">
       </a>
-      <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
         <h5><?php echo htmlspecialchars($l['nombre']); ?></h5>
+        <p class="mb-0 small"><?php echo htmlspecialchars($l['descripcion']); ?></p>
       </div>
     </div>
     <?php endforeach; ?>
